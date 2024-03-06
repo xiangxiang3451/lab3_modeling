@@ -18,7 +18,7 @@ namespace WindowsFormsApp1
 
             timer = new Timer();
             timer.Interval = 500;  // Set the refresh interval to 0.5 seconds
-            timer.Tick += Timer_Tick_1;
+            timer.Tick += Timer1_Tick;
 
             grid = new bool[20, 20]; // Initialize the grid
             nextGrid = new bool[20, 20]; // Initialize the grid of the next state
@@ -92,19 +92,19 @@ namespace WindowsFormsApp1
         private int CountAliveNeighbors(int row, int col)
         {
             int count = 0;
-            for (int i = row - 1; i <= row + 1; i++)
+
+            // Check the left neighbor
+            if (col > 0 && grid[row, col - 1])
             {
-                for (int j = col - 1; j <= col + 1; j++)
-                {
-                    if (i >= 0 && i < 20 && j >= 0 && j < 20 && !(i == row && j == col))
-                    {
-                        if (grid[i, j])
-                        {
-                            count++;
-                        }
-                    }
-                }
+                count++;
             }
+
+            // Check the right neighbor
+            if (col < 19 && grid[row, col + 1])
+            {
+                count++;
+            }
+
             return count;
         }
 
@@ -129,16 +129,20 @@ namespace WindowsFormsApp1
             }
         }
 
-        private void Timer_Tick_1(object sender, EventArgs e)
-        {
-            ApplyRule110(); // reply rule 110
-            UpdateGrid();
-        }
 
-        private void StartButton_Click_1(object sender, EventArgs e)
+
+        private void StartButton_Click(object sender, EventArgs e)
         {
             isRunning = true;
             timer.Start();
+        }
+
+
+
+        private void Timer1_Tick(object sender, EventArgs e)
+        {
+            ApplyRule110(); // reply rule 110
+            UpdateGrid();
         }
 
         private void PauseButton_Click_1(object sender, EventArgs e)

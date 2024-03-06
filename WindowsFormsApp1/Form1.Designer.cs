@@ -95,7 +95,7 @@
             this.StartButton.TabIndex = 1;
             this.StartButton.Text = "Start";
             this.StartButton.UseVisualStyleBackColor = true;
-            this.StartButton.Click += new System.EventHandler(this.StartButton_Click_1);
+            this.StartButton.Click += new System.EventHandler(this.StartButton_Click);
             // 
             // PauseButton
             // 
@@ -111,6 +111,7 @@
             // 
             this.Timer1.Enabled = true;
             this.Timer1.Interval = 500;
+            this.Timer1.Tick += new System.EventHandler(this.Timer1_Tick);
             // 
             // label1
             // 
